@@ -7,21 +7,24 @@ angular.module('PropertyBinder')
 				constructor(...properties) {
 					this.properties = properties;
 					this.binded = false;
+					this.sealed = false;
 				}
 
 				from(scope) {
-
 					this._throwErrorIfAlreadyBinded();
 					this.from = scope;
 					return this;
 				}
 
 				to(scope) {
-
 					this._throwErrorIfAlreadyBinded();
 					this.to = scope;
 					return this;
 				}
+
+				seal() { this.sealed = true; }
+
+				unseal() { this.sealed = false; }
 
 				apply(aliases = this.properties) {
 
@@ -35,7 +38,10 @@ angular.module('PropertyBinder')
 							Object.defineProperty(this.to, aliases[i], { 
 								get: () => this.from[this.properties[i]],
 								set: (value) => { 
-									this.from[this.properties[i]] = value; 
+									if(!this.sealed)
+										this.from[this.properties[i]] = value; 
+									else
+										throw Error('Trying to update a sealed property');
 								}
 							});
 					}
