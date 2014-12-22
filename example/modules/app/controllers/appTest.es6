@@ -10,7 +10,7 @@ angular.module('App')
 		// bind(['users','fu', 'bar']).from(userFactory).to(this /*or $scope*/).apply();
 
 		// you can also give an alias to your property
-		var binding = bind('users').as({users:'usersAlias'}).from(userFactory).to(this /*or $scope*/).apply();
+		var binding = bind('users').as('usersAlias').from(userFactory).to(this /*or $scope*/).apply();
 		// var binding = bind(['users','fu', 'bar']).as({ 'users':'usersAlias','fu':'fub', 'bar':'bars'}).from(userFactory).to(this /*or $scope*/).apply();
 
 		// if you want to keep secure the factory data you can also seal the reference
