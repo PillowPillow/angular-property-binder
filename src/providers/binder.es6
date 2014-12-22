@@ -26,6 +26,10 @@ angular.module('PropertyBinder')
 
 				unseal() { this.sealed = false; }
 
+				toggleSealing() {
+					this.sealed = !this.sealed;
+				}
+
 				apply(aliases = this.properties) {
 
 					this._throwErrorIfAlreadyBinded();
