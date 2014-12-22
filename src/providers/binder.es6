@@ -62,7 +62,7 @@ angular.module('PropertyBinder')
 					if(this.from && this.to && this.properties.length > 0) {
 						for(let property of self.properties) {
 							Object.defineProperty(self.to, (self.aliases[property] || property) , { 
-								get: () => self.from[property],
+								get: () => self.from[property] instanceof Function ? self.from[property].bind(self.from) : self.from[property],
 								set: (value) => { 
 									if(!self.sealed)
 										self.from[property] = value; 
