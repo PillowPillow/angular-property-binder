@@ -26,3 +26,6 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+src/core.js
+src/providers/binder.js
+src/services/binder.js
