@@ -6,18 +6,21 @@ angular.module('App')
 		// old method - just create a reference with the factory property
 		// this.users = userFactory.users;	
 
-		bind('users'/*could take a list of properties*/).from(userFactory).to(this /*or $scope*/).apply();
-		// bind('users','fu', 'bar').from(userFactory).to(this /*or $scope*/).apply();
+		bind('users'/*could take an array of properties*/).from(userFactory).to(this /*or $scope*/).apply();
+		// bind(['users','fu', 'bar']).from(userFactory).to(this /*or $scope*/).apply();
 
 		// you can also give an alias to your property
-		var binding = bind('users').from(userFactory).to(this /*or $scope*/).apply('usersAlias'/*could take a list of aliases*/);
-		// var binding = bind('users').from(userFactory).to(this /*or $scope*/).apply('usersAlias','fu', 'bar');
+		var binding = bind('users').as({users:'usersAlias'}).from(userFactory).to(this /*or $scope*/).apply();
+		// var binding = bind(['users','fu', 'bar']).as({ 'users':'usersAlias','fu':'fub', 'bar':'bars'}).from(userFactory).to(this /*or $scope*/).apply();
 
 		// if you want to keep secure the factory data you can also seal the reference
 		binding.seal();
 		binding.unseal();
 
-		this.load = userFactory.load;
+		// you can even bind a function in order to keep the scope
+		bind('load').to(this).from(userFactory).apply();
+		// this.load = userFactory.load; 
+
 
 		userFactory.load();
 
