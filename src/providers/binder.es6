@@ -4,10 +4,11 @@ angular.module('PropertyBinder')
 
 			class Binder {
 
-				constructor(...properties) {
-					this.properties = properties;
+				constructor(properties = []) {
+					this.properties = properties instanceof Array ? properties : [properties];
 					this.binded = false;
 					this.sealed = false;
+					this.aliases = {};
 				}
 
 				from(scope) {
@@ -19,6 +20,23 @@ angular.module('PropertyBinder')
 				to(scope) {
 					this._throwErrorIfAlreadyBinded();
 					this.to = scope;
+					return this;
+				}
+
+				as(aliases = {}) {
+					if(aliases instanceof Object)
+						this.aliases = aliases;
+					else
+						if(typeof aliases === 'string') {
+							if(this.properties.length === 1) {
+								let alias = aliases;
+								this.aliases = {};
+								this.aliases[this.properties[0]] = alias;
+							}
+							else
+								throw Error('Ambiguous aliases');
+						}
+
 					return this;
 				}
 
@@ -37,24 +55,22 @@ angular.module('PropertyBinder')
 					return this;
 				}
 
-				apply(aliases = this.properties) {
+				apply() {
 
 					this._throwErrorIfAlreadyBinded();
-
-					if(typeof aliases === 'string')
-						aliases = [aliases];
-
+					var self = this;
 					if(this.from && this.to && this.properties.length > 0) {
-						for(let i = 0; i<this.properties.length; i++)
-							Object.defineProperty(this.to, aliases[i], { 
-								get: () => this.from[this.properties[i]],
+						for(let property of self.properties) {
+							Object.defineProperty(self.to, (self.aliases[property] || property) , { 
+								get: () => self.from[property],
 								set: (value) => { 
-									if(!this.sealed)
-										this.from[this.properties[i]] = value; 
+									if(!self.sealed)
+										self.from[property] = value; 
 									else
 										throw Error('Trying to update a sealed property');
 								}
 							});
+						}
 					}
 
 					this.binded = true;
