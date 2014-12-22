@@ -25,12 +25,12 @@ function Grunt(grunt) {
 		options: {
 			sourceMap: false
 		},
-		dist: {
+		all: {
 			files: [{
 				expand: true,
 				cwd: paths.base,
 				ext: '.js',
-				src: (pathOption ? pathOption.name : ['src/**/*.es6']),
+				src: (pathOption ? pathOption.name : ['**/*.es6']),
 				dest: paths.base
 			}]
 		}
@@ -85,8 +85,8 @@ function Grunt(grunt) {
 
 	grunt.initConfig(Configuration);
 
-	grunt.registerTask('es6', ['6to5:dist', 'add_comment:common']);
-	grunt.registerTask('build', ['6to5:dist', 'uglify:dist', 'add_comment:dist']);
+	grunt.registerTask('es6', ['6to5:all', 'add_comment:common']);
+	grunt.registerTask('build', ['6to5:all', 'uglify:dist', 'add_comment:dist']);
 };
 
 module.exports = Grunt;
