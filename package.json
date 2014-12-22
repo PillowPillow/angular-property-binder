@@ -1,0 +1,22 @@
+{
+  "name": "angular-property-binder",
+  "version": "0.1.0",
+  "description": "Bind property and keep safe the reference",
+  "keywords": [
+    "Angular",
+    "Binder",
+    "Property",
+    "Binding",
+    "Factory",
+    "Controller"
+  ],
+  "author": "Gaignoux Nicolas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PillowPillow/angular-property-binder.git"
+  },
+  "devDependencies": {
+    "6to5": "^1.15.0"
+  }
+}
