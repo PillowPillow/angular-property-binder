@@ -1,5 +1,5 @@
 angular.module('App')
-	//you can user $scope method or controllerAs, anyway
+	//you can use $scope method or controllerAs, anyway
 	.controller('App.controllers.appTest', ['PropertyBinder.services.binder', 'App.factories.users', 
 	function(bind, userFactory){
 		
