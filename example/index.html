@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+	<!-- meta -->
+	<title>Angular property binder</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Lang" content="fr">
+		<meta name="author" content="Gaignoux Nicolas"/>
+		<!-- if partials used -->
+		<!-- <meta name="fragment" content="!"> -->
+	<!-- meta -->
+
+	<!-- design -->
+		<!-- styles -->
+		<!-- styles -->
+		<!-- fonts -->
+		<!-- fonts -->
+	<!-- design -->
+
+	</head>
+	<body ng-app="App">
+
+		<!-- content -->
+		<section ng-controller="App.controllers.appTest as AppTest">
+			<button ng-click="AppTest.load();">Delete reference and reload data</button>
+			<hr>
+			<section class="user-list">
+				<article class="user" ng-repeat="user in AppTest.users track by $index">{{user.name}}</article>
+			</section>
+			<hr>
+			<section class="user-list">
+				<article class="user" ng-repeat="user in AppTest.usersAlias track by $index">{{user.name}}</article>
+			</section>
+
+		</section>
+
+		<!-- content -->
+
+		<!-- scripts -->
+			<!-- libraries -->
+			<script src="../bower_components/angular/angular.min.js"></script>
+			<script src="../dist/angular-property-binder.min.js"></script>
+			<!-- <script src="../src/core.js"></script> -->
+			<!-- <script src="../src/providers/binder.js"></script> -->
+			<!-- <script src="../src/services/binder.js"></script> -->
+			<!-- libraries -->
+			<!-- features -->
+			<script src="modules/app/core.js"></script>
+			<script src="modules/app/values/users.js"></script>
+			<script src="modules/app/services/userPicker.js"></script>
+			<script src="modules/app/factories/users.js"></script>
+			<script src="modules/app/controllers/appTest.js"></script>
+			<!-- features -->
+		<!-- scripts -->
+	
+	</body>
+</html>
