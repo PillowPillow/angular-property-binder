@@ -22,12 +22,19 @@ angular.module('PropertyBinder')
 					return this;
 				}
 
-				seal() { this.sealed = true; }
+				seal() {
+					this.sealed = true;
+					return this;
+				}
 
-				unseal() { this.sealed = false; }
+				unseal() {
+					this.sealed = false;
+					return this;
+				}
 
 				toggleSealing() {
 					this.sealed = !this.sealed;
+					return this;
 				}
 
 				apply(aliases = this.properties) {
@@ -61,5 +68,5 @@ angular.module('PropertyBinder')
 			}
 
 			return Binder;
-		}
-	})
+		};
+	});
