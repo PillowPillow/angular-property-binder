@@ -58,23 +58,26 @@ angular.module('PropertyBinder')
 				apply() {
 
 					this._throwErrorIfAlreadyBinded();
-					var self = this;
-					if(this.from && this.to && this.properties.length > 0) {
-						for(let property of self.properties) {
-							Object.defineProperty(self.to, (self.aliases[property] || property) , { 
-								get: () => self.from[property] instanceof Function ? self.from[property].bind(self.from) : self.from[property],
-								set: (value) => { 
-									if(!self.sealed)
-										self.from[property] = value; 
-									else
-										throw Error('Trying to update a sealed property');
-								}
-							});
-						}
-					}
+					if(this.from && this.to && this.properties.length > 0)
+						for(var property of this.properties)
+							this._createProperty(property);
 
 					this.binded = true;
 					return this;
+				}
+
+				_createProperty(property) {
+					Object.defineProperty(this.to, (this.aliases[property] || property) , { 
+						enumerable: true,
+						configurable: true, 
+						get: () => this.from[property] instanceof Function ? this.from[property].bind(this.from) : this.from[property],
+						set: (value) => { 
+							if(!this.sealed)
+								this.from[property] = value; 
+							else
+								throw Error('Trying to update a sealed property');
+						}
+					});
 				}
 
 				_throwErrorIfAlreadyBinded() {
