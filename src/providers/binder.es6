@@ -59,8 +59,8 @@ angular.module('PropertyBinder')
 
 					this._throwErrorIfAlreadyBinded();
 					if(this.from && this.to && this.properties.length > 0)
-						for(var property of this.properties)
-							this._createProperty(property);
+						for(var i = 0; i<this.properties.length; i++) 
+							this._createProperty(this.properties[i]);
 
 					this.binded = true;
 					return this;
