@@ -1,10 +1,15 @@
 {
-  "name": "angular-property-builder",
+  "name": "angular-property-binder",
+  "description": "Angular element binding service, keep safe your object references.",
   "version": "0.1.0",
   "authors": [
     "Nicolas Gaignoux <gaignoux.nicolas@gmail.com>"
   ],
-  "description": "angular element binding service",
+  "main": "dist/angular-property-binder.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PillowPillow/angular-property-binder.git"
+  },
   "keywords": [
     "Angular",
     "Binder",
@@ -13,13 +18,13 @@
     "Factory",
     "Controller"
   ],
-  "license": "MIT",
   "ignore": [
-    "**/.*",
+    ".gitignore",
+    ".jshintrc",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "src/**/*.js",
+    "lib/**/*.js"
   ],
   "dependencies": {
     "angular": "~1.3.6"
