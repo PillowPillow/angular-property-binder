@@ -13,17 +13,21 @@ angular.module('PropertyBinder')
 
 				from(scope) {
 					this._throwErrorIfAlreadyBinded();
+
 					this.from = scope;
 					return this;
 				}
 
 				to(scope) {
 					this._throwErrorIfAlreadyBinded();
+
 					this.to = scope;
 					return this;
 				}
 
 				as(aliases = {}) {
+					this._throwErrorIfAlreadyBinded();
+
 					if(aliases instanceof Object)
 						this.aliases = aliases;
 					else
@@ -64,6 +68,20 @@ angular.module('PropertyBinder')
 
 					this.binded = true;
 					return this;
+				}
+
+				destroy() {
+
+					for(var i = 0; i<this.properties.length; i++) 
+						this._deleteProperty(this.properties[i]);
+
+					this.binded = false;
+					return this;
+				}
+
+				_deleteProperty(property) {
+					var alias = this.aliases[property] || property;
+					delete this.to[alias];
 				}
 
 				_createProperty(property) {
