@@ -17,6 +17,8 @@ angular.module('App')
 		binding.seal();
 		binding.unseal();
 
+		// binding.destroy()
+
 		// you can even bind a function in order to keep the scope
 		bind('load').to(this).from(userFactory).apply();
 		// this.load = userFactory.load; 
