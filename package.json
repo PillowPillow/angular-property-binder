@@ -1,6 +1,6 @@
 {
   "name": "angular-property-binder",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Bind property and keep safe the reference",
   "keywords": [
     "Angular",

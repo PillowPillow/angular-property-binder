@@ -96,10 +96,10 @@ angular.module('PropertyBinder')
 						get: () => this.from[property] instanceof Function ? this.from[property].bind(this.from) : this.from[property],
 						set: (value) => { 
 							if(!this._sealed) {
-								if(this.from[property] !== value)
-									this._change(value, this.from[property]);
-
+								var oldValue = this.from[property];
 								this.from[property] = value; 
+								if(oldValue !== value)
+									this._change(value, oldValue);
 							}
 							else
 								throw Error('Trying to update a sealed property');
