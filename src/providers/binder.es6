@@ -5,10 +5,10 @@ angular.module('PropertyBinder')
 			class Binder {
 
 				constructor(properties = []) {
-					this.properties = properties instanceof Array ? properties : [properties];
-					this.binded = false;
-					this.sealed = false;
-					this.aliases = {};
+					this._properties = properties instanceof Array ? properties : [properties];
+					this._binded = false;
+					this._sealed = false;
+					this._aliases = {};
 				}
 
 				from(scope) {
@@ -29,13 +29,13 @@ angular.module('PropertyBinder')
 					this._throwErrorIfAlreadyBinded();
 
 					if(aliases instanceof Object)
-						this.aliases = aliases;
+						this._aliases = aliases;
 					else
 						if(typeof aliases === 'string') {
-							if(this.properties.length === 1) {
+							if(this._properties.length === 1) {
 								let alias = aliases;
-								this.aliases = {};
-								this.aliases[this.properties[0]] = alias;
+								this._aliases = {};
+								this._aliases[this._properties[0]] = alias;
 							}
 							else
 								throw Error('Ambiguous aliases');
@@ -45,52 +45,52 @@ angular.module('PropertyBinder')
 				}
 
 				seal() {
-					this.sealed = true;
+					this._sealed = true;
 					return this;
 				}
 
 				unseal() {
-					this.sealed = false;
+					this._sealed = false;
 					return this;
 				}
 
 				toggleSealing() {
-					this.sealed = !this.sealed;
+					this._sealed = !this._sealed;
 					return this;
 				}
 
 				apply() {
 
 					this._throwErrorIfAlreadyBinded();
-					if(this.from && this.to && this.properties.length > 0)
-						for(var i = 0; i<this.properties.length; i++) 
-							this._createProperty(this.properties[i]);
+					if(this.from && this.to && this._properties.length > 0)
+						for(var i = 0; i<this._properties.length; i++) 
+							this._createProperty(this._properties[i]);
 
-					this.binded = true;
+					this._binded = true;
 					return this;
 				}
 
 				destroy() {
 
-					for(var i = 0; i<this.properties.length; i++) 
-						this._deleteProperty(this.properties[i]);
+					for(var i = 0; i<this._properties.length; i++) 
+						this._deleteProperty(this._properties[i]);
 
-					this.binded = false;
+					this._binded = false;
 					return this;
 				}
 
 				_deleteProperty(property) {
-					var alias = this.aliases[property] || property;
+					var alias = this._aliases[property] || property;
 					delete this.to[alias];
 				}
 
 				_createProperty(property) {
-					Object.defineProperty(this.to, (this.aliases[property] || property) , { 
+					Object.defineProperty(this.to, (this._aliases[property] || property) , { 
 						enumerable: true,
 						configurable: true, 
 						get: () => this.from[property] instanceof Function ? this.from[property].bind(this.from) : this.from[property],
 						set: (value) => { 
-							if(!this.sealed)
+							if(!this._sealed)
 								this.from[property] = value; 
 							else
 								throw Error('Trying to update a sealed property');
@@ -99,7 +99,7 @@ angular.module('PropertyBinder')
 				}
 
 				_throwErrorIfAlreadyBinded() {
-					if(this.binded)
+					if(this._binded)
 						throw Error('Property already binded');
 				}
 			}
