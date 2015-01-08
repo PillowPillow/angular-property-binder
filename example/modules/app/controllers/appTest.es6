@@ -6,16 +6,36 @@ angular.module('App')
 		// old method - just create a reference with the factory property
 		// this.users = userFactory.users;	
 
-		bind('users'/*could take an array of properties*/).from(userFactory).to(this /*or $scope*/).apply();
+		this.message = '';
+
+		bind('users'/*could take an array of properties*/)
+			.from(userFactory)
+			.to(this /*or $scope*/)
+			.apply();
+
+		// the service can be used to create a reference on a primitive data type like integer or float
+		bind('nbToLoad')
+			.from(userFactory)
+			.to(this)
+			.apply()
+			//bind an an event triggered when the property is updated from this reference
+			.onchange((newVal, oldVal) => {
+				console.log('property updated', newVal, oldVal);
+				userFactory.load();
+			});
+
 		// bind(['users','fu', 'bar']).from(userFactory).to(this /*or $scope*/).apply();
 
 		// you can also give an alias to your property
+		// in this case the property will be accessible by this.userAlias
 		var binding = bind('users').as('usersAlias').from(userFactory).to(this /*or $scope*/).apply();
 		// var binding = bind(['users','fu', 'bar']).as({ 'users':'usersAlias','fu':'fub', 'bar':'bars'}).from(userFactory).to(this /*or $scope*/).apply();
 
 		// if you want to keep secure the factory data you can also seal the reference
 		binding.seal();
 		binding.unseal();
+
+
 
 		// binding.destroy()
 
@@ -25,5 +45,4 @@ angular.module('App')
 
 
 		userFactory.load();
-
 	}]);

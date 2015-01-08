@@ -7,6 +7,8 @@ angular.module('App')
 		prototype.users = [];
 		// data as key value array of object
 		/*only for example*/prototype.users2 = {};
+		// number of user to load
+		prototype.nbToLoad = 3;
 
 		prototype.load = loadfn;
 
@@ -42,6 +44,6 @@ angular.module('App')
 				.error(() => console.error('an error occurred during the data loading'));
 			*/
 		
-			prototype.users = userPicker.getRandomList();
+			prototype.users = userPicker.getRandomList(this.nbToLoad);
 		}
 	}]);

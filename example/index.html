@@ -26,6 +26,7 @@
 
 		<!-- content -->
 		<section ng-controller="App.controllers.appTest as AppTest">
+			<input type="number" ng-model="AppTest.nbToLoad">
 			<button ng-click="AppTest.load();">Delete reference and reload data</button>
 			<hr>
 			<section class="user-list">
@@ -35,7 +36,8 @@
 			<section class="user-list">
 				<article class="user" ng-repeat="user in AppTest.usersAlias track by $index">{{user.name}}</article>
 			</section>
-
+			<hr>
+				<article class="message">{{AppTest.message}}</article>
 		</section>
 
 		<!-- content -->
