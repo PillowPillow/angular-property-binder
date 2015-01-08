@@ -9,6 +9,7 @@ angular.module('PropertyBinder')
 					this._binded = false;
 					this._sealed = false;
 					this._aliases = {};
+					this._change = () => {};
 				}
 
 				from(scope) {
@@ -42,6 +43,10 @@ angular.module('PropertyBinder')
 						}
 
 					return this;
+				}
+
+				onchange(changeEvent = () => {}) {
+					this._change = changeEvent;
 				}
 
 				seal() {
@@ -90,8 +95,12 @@ angular.module('PropertyBinder')
 						configurable: true, 
 						get: () => this.from[property] instanceof Function ? this.from[property].bind(this.from) : this.from[property],
 						set: (value) => { 
-							if(!this._sealed)
+							if(!this._sealed) {
+								if(this.from[property] !== value)
+									this._change(value, this.from[property]);
+
 								this.from[property] = value; 
+							}
 							else
 								throw Error('Trying to update a sealed property');
 						}
