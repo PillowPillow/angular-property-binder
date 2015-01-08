@@ -47,6 +47,7 @@ angular.module('PropertyBinder')
 
 				onchange(changeEvent = () => {}) {
 					this._change = changeEvent;
+					return this;
 				}
 
 				seal() {
