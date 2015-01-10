@@ -1,5 +1,5 @@
 angular.module('App')
-	//you can use $scope or controllerAs methods, anyway
+	//you can use $scope or controllerAs methods
 	.controller('App.controllers.appTest', ['PropertyBinder.services.binder', 'App.factories.users', 
 	function(bind, userFactory){
 		
@@ -8,7 +8,7 @@ angular.module('App')
 
 		this.message = '';
 
-		bind('users'/*could take an array of properties*/)
+		bind('users'/*can take an array of properties*/)
 			.from(userFactory)
 			.to(this /*or $scope*/)
 			.apply();
@@ -18,7 +18,7 @@ angular.module('App')
 			.from(userFactory)
 			.to(this)
 			.apply()
-			//bind an an event triggered when the property is updated from this reference
+			//bind an event triggered when the property is updated from this reference
 			.onchange((newVal, oldVal) => {
 				console.log('property updated', newVal, oldVal);
 				userFactory.load();
