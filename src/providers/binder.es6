@@ -29,9 +29,18 @@ angular.module('PropertyBinder')
 				as(aliases = {}) {
 					this._throwErrorIfAlreadyBinded();
 
-					if(aliases instanceof Object)
-						this._aliases = aliases;
-					else
+					if(aliases instanceof Object) {
+
+						if(aliases instanceof Array) {
+							for(let i = 0; i<aliases.length; i++)
+								if(!!this._properties[i])
+									this._aliases[this._properties[i]] = aliases[i];
+						}
+						else
+							this._aliases = aliases;
+					}
+					else {
+
 						if(typeof aliases === 'string') {
 							if(this._properties.length === 1) {
 								let alias = aliases;
@@ -41,6 +50,7 @@ angular.module('PropertyBinder')
 							else
 								throw Error('Ambiguous aliases');
 						}
+					}
 
 					return this;
 				}
