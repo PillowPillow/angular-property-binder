@@ -72,6 +72,11 @@ function Grunt(grunt) {
 
 	Configuration.uglify = {
 		options: {
+			enclose: {
+				'window': 'window',
+				'window.document': 'document',
+				'window.angular': 'angular'
+			},
 			mangle: {
 				except: ['angular']
 			}
