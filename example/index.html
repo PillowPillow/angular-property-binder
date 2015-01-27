@@ -37,7 +37,9 @@
 				<article class="user" ng-repeat="user in AppTest.usersAlias track by $index">{{user.name}}</article>
 			</section>
 			<hr>
-				<article class="message">{{AppTest.message}}</article>
+			<span>nested property: "{{AppTest.eyeColor}}"</span>
+			<hr>
+			<article class="message">{{AppTest.message}}</article>
 		</section>
 
 		<!-- content -->
@@ -45,10 +47,10 @@
 		<!-- scripts -->
 			<!-- libraries -->
 			<script src="../bower_components/angular/angular.min.js"></script>
-			<script src="../dist/angular-property-binder.min.js"></script>
-			<!-- <script src="../src/core.js"></script>
+			<!-- <script src="../dist/angular-property-binder.min.js"></script> -->
+			<script src="../src/core.js"></script>
 			<script src="../src/providers/binder.js"></script>
-			<script src="../src/services/binder.js"></script> -->
+			<script src="../src/services/binder.js"></script>
 			<!-- libraries -->
 			<!-- features -->
 			<script src="modules/app/core.js"></script>

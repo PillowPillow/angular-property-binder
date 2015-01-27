@@ -9,7 +9,6 @@ angular.module('App')
 		/*only for example*/prototype.users2 = {};
 		// number of user to load
 		prototype.nbToLoad = 3;
-
 		prototype.load = loadfn;
 
 		return prototype;

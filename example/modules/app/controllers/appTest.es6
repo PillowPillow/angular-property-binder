@@ -13,6 +13,13 @@ angular.module('App')
 			.to(this /*or $scope*/)
 			.apply();
 
+		bind('eyeColor')
+			//avoid reference deteling
+			//sample : get the eye color of the first user in the userFactory array
+			.from(userFactory, 'users.0'/*path toward the nested property*/)
+			.to(this)
+			.apply();
+
 		// the service can be used to create a reference on a primitive data type like integer or float
 		bind('nbToLoad')
 			.from(userFactory)
