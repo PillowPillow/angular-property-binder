@@ -8,21 +8,24 @@ angular.module('PropertyBinder')
 					this._properties = properties instanceof Array ? properties : [properties];
 					this._binded = false;
 					this._sealed = false;
+					this._to = undefined;
+					this._from = undefined;
+					this._path = [];
 					this._aliases = {};
 					this._change = () => {};
 				}
 
-				from(scope) {
+				from(scope, path = []) {
 					this._throwErrorIfAlreadyBinded();
-
-					this.from = scope;
+					this._path = typeof path === 'string' ? path = path.split('.') : path;
+					this._from = scope;
 					return this;
 				}
 
 				to(scope) {
 					this._throwErrorIfAlreadyBinded();
 
-					this.to = scope;
+					this._to = scope;
 					return this;
 				}
 
@@ -78,7 +81,7 @@ angular.module('PropertyBinder')
 				apply() {
 
 					this._throwErrorIfAlreadyBinded();
-					if(this.from && this.to && this._properties.length > 0)
+					if(this._from && this._to && this._properties.length > 0)
 						for(var i = 0; i<this._properties.length; i++) 
 							this._createProperty(this._properties[i]);
 
@@ -97,18 +100,27 @@ angular.module('PropertyBinder')
 
 				_deleteProperty(property) {
 					var alias = this._aliases[property] || property;
-					delete this.to[alias];
+					delete this._to[alias];
 				}
 
 				_createProperty(property) {
-					Object.defineProperty(this.to, (this._aliases[property] || property) , { 
+					Object.defineProperty(this._to, (this._aliases[property] || property) , { 
 						enumerable: true,
 						configurable: true, 
-						get: () => this.from[property] instanceof Function ? this.from[property].bind(this.from) : this.from[property],
+						get: () => {
+							var src = this._from;
+							if(this._path.length > 0)
+								for(var i=0; i<this._path.length; i++) {
+									src = src[this._path[i]];
+									if(!src)
+										throw Error('unable to acces to the given property');
+								}
+							return src[property] instanceof Function ? src[property].bind(src) : src[property];
+						},
 						set: (value) => { 
 							if(!this._sealed) {
-								var oldValue = this.from[property];
-								this.from[property] = value; 
+								var oldValue = this._from[property];
+								this._from[property] = value; 
 								if(oldValue !== value)
 									this._change(value, oldValue);
 							}
