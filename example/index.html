@@ -30,14 +30,15 @@
 			<button ng-click="AppTest.load();">Delete reference and reload data</button>
 			<hr>
 			<section class="user-list">
-				<article class="user" ng-repeat="user in AppTest.users track by $index">{{user.name}}</article>
+				<article class="user" ng-repeat="user in AppTest.users track by $index">{{user.name}} - [eye color : {{user.eyeColor}}]</article>
 			</section>
 			<hr>
 			<section class="user-list">
-				<article class="user" ng-repeat="user in AppTest.usersAlias track by $index">{{user.name}}</article>
+				<article class="user" ng-repeat="user in AppTest.usersAlias track by $index">{{user.name}} - [eye color : {{user.eyeColor}}]</article>
 			</section>
 			<hr>
-			<span>nested property: "{{AppTest.eyeColor}}"</span>
+			<span>nested property: </span>
+			<input type="text" ng-model="AppTest.eyeColor">
 			<hr>
 			<article class="message">{{AppTest.message}}</article>
 		</section>
@@ -47,10 +48,10 @@
 		<!-- scripts -->
 			<!-- libraries -->
 			<script src="../bower_components/angular/angular.min.js"></script>
-			<script src="../dist/angular-property-binder.min.js"></script>
-			<!-- <script src="../src/core.js"></script>
+			<!-- <script src="../dist/angular-property-binder.min.js"></script> -->
+			<script src="../src/core.js"></script>
 			<script src="../src/providers/binder.js"></script>
-			<script src="../src/services/binder.js"></script> -->
+			<script src="../src/services/binder.js"></script>
 			<!-- libraries -->
 			<!-- features -->
 			<script src="modules/app/core.js"></script>

@@ -108,19 +108,14 @@ angular.module('PropertyBinder')
 						enumerable: true,
 						configurable: true, 
 						get: () => {
-							var src = this._from;
-							if(this._path.length > 0)
-								for(var i=0; i<this._path.length; i++) {
-									src = src[this._path[i]];
-									if(!src)
-										throw Error('unable to acces to the given property');
-								}
+							var src = this._getSrc();
 							return src[property] instanceof Function ? src[property].bind(src) : src[property];
 						},
 						set: (value) => { 
 							if(!this._sealed) {
-								var oldValue = this._from[property];
-								this._from[property] = value; 
+								var src = this._getSrc();
+								var oldValue = src[property];
+								src[property] = value; 
 								if(oldValue !== value)
 									this._change(value, oldValue);
 							}
@@ -128,6 +123,17 @@ angular.module('PropertyBinder')
 								throw Error('Trying to update a sealed property');
 						}
 					});
+				}
+
+				_getSrc() {
+					var src = this._from;
+					if(this._path.length > 0)
+						for(var i=0; i<this._path.length; i++) {
+							src = src[this._path[i]];
+							if(!src)
+								throw Error('unable to acces to the given property');
+						}
+					return src;
 				}
 
 				_throwErrorIfAlreadyBinded() {
