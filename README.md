@@ -29,8 +29,9 @@ angular.module('MyApp')
 ````
 
 ### API Reference
+------------
 
-Angular Property Binder service provides easy to use and minimalistic chaining methods. 
+Angular Property Binder service provides easy to use and minimalistic chaining methods.  
 Here is the full list of accessible methods:
 
 ##### **@service** **[Property.binder.binder]*** binder(property)  
