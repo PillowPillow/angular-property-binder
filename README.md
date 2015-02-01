@@ -37,38 +37,40 @@ Here is the full list of accessible methods:
 ##### **@service** **[Property.binder.binder]*** binder(property)  
 **param** ***property*** {**Array**|**String**} property name to bind  
 
+=======================
+
 ##### **@method** ***from***(scope, path)  
 **@param** ***scope*** {**Object**|**Array**} source object containing the property to bind  
 **@param** ***path*** {**String**|**Array**} **[OPTIONAL]** path to the targeted source. Useful when you wan't to create a reference on a nested property  
 
----------------------------------  
+=======================
 
 ##### **@method** ***to***(scope)  
 **@param** ***scope*** {**Object**|**Array**} target object  
 
----------------------------------  
+=======================
 
 ##### **@method** ***as***(alias)  
 **@param** ***alias*** {**Object**|**Array**|**String**} alias(es) for property  
 
----------------------------------  
+=======================
 
 ##### **@method** ***onchange***(callback) | adds a onchange event callback to the binding  
 **@param** ***callback*** {**Function**} function called each time the property is updated from the created reference  
 
----------------------------------  
+=======================
 
 ##### **@method** ***seal***() | seals the binding. the assignations will not work after that  
 
----------------------------------  
+=======================
 
 ##### **@method** ***unseal***()  
 
----------------------------------  
+=======================
 
 ##### **@method** ***destroy***()  
 
----------------------------------  
+=======================
 
 Basic samples:
 ````javascript
