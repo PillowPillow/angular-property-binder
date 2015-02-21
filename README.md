@@ -9,7 +9,8 @@ Don't use you're controller as a MODEL - [Best Practice](http://toddmotto.com/re
 ### Installation
 ------------
 
-Install: `bower install angular-property-binder`
+bower: `bower install angular-property-binder`  
+npm: `npm install angular-property-binder`  
 
 
 Simply add:
@@ -37,7 +38,7 @@ angular.module('MyApp')
 Angular Property Binder service provides easy to use and minimalistic chaining methods.  
 Here is the full list of accessible methods:
 
-##### **@service** **[Property.binder.binder]*** binder(property)  
+##### **@service** **[PropertyBinder.services.binder]** binder(property)  
 **param** ***property*** {**Array**|**String**} property name to bind  
 
 =======================
@@ -58,12 +59,14 @@ Here is the full list of accessible methods:
 
 =======================
 
-##### **@method** ***onchange***(callback) | adds a onchange event callback to the binding  
+##### **@method** ***onchange***(callback)  
+adds a onchange event callback to the binding  
 **@param** ***callback*** {**Function**} function called each time the property is updated from the created reference  
 
 =======================
 
-##### **@method** ***seal***() | seals the binding. the assignations will not work after that  
+##### **@method** ***seal***()  
+seals the binding. the assignations will not work after that  
 
 =======================
 
