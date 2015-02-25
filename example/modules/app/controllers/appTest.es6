@@ -14,7 +14,7 @@ angular.module('App')
 			.apply();
 
 		bind('eyeColor')
-			//avoid reference deteling
+			//avoid reference deleting
 			//sample : get the eye color of the first user in the userFactory array
 			.from(userFactory, 'users.0'/*path toward the nested property*/)
 			.to(this)
