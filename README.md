@@ -41,10 +41,6 @@ Here is the full list of accessible methods:
 
 ###`binder( value )`
 
-> Cranks out a collision resistant hash, relatively quickly.
-> Not suitable for passwords, or sensitive information.
-*Synchronous only*
-
 #### Params:
  - **value**: String or Array. property name to bind.  
 
