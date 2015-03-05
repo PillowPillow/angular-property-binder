@@ -9,9 +9,8 @@ Don't use you're controller as a MODEL - [Best Practice](http://toddmotto.com/re
 ### Installation
 ------------
 
-bower: `bower install angular-property-binder`  
-npm: `npm install angular-property-binder`  
-
+`bower install angular-property-binder`  
+`npm install angular-property-binder`  
 
 Simply add:
 
@@ -23,7 +22,7 @@ to your HTML, load module `['PropertyBinder']` and then inject the binder servic
 
 ````javascript
 
-angular.module('MyApp')
+angular.module('MyApp', ['PropertyBinder'])
     .controller('MyController', [
     'PropertyBinder.services.binder', 
     function(bind) { 
@@ -38,43 +37,113 @@ angular.module('MyApp')
 Angular Property Binder service provides easy to use and minimalistic chaining methods.  
 Here is the full list of accessible methods:
 
-##### **@service** **[PropertyBinder.services.binder]** binder(property)  
-**param** ***property*** {**Array**|**String**} property name to bind  
+## Service **[PropertyBinder.services.binder]**
 
-=======================
+###`binder( value )`
 
-##### **@method** ***from***(scope, path)  
-**@param** ***scope*** {**Object**|**Array**} source object containing the property to bind  
-**@param** ***path*** {**String**|**Array**} **[OPTIONAL]** path to the targeted source. Useful when you wan't to create a reference on a nested property  
+> Cranks out a collision resistant hash, relatively quickly.
+> Not suitable for passwords, or sensitive information.
+*Synchronous only*
 
-=======================
+#### Params:
+ - **value**: String or Array. property name to bind.  
 
-##### **@method** ***to***(scope)  
-**@param** ***scope*** {**Object**|**Array**} target object  
+#### Returns:
+ - Object; the binder
 
-=======================
+---
 
-##### **@method** ***as***(alias)  
-**@param** ***alias*** {**Object**|**Array**|**String**} alias(es) for property  
+## Methods
 
-=======================
+###`from( scope, path )`
 
-##### **@method** ***onchange***(callback)  
-adds a onchange event callback to the binding  
-**@param** ***callback*** {**Function**} function called each time the property is updated from the created reference  
+> Sets the source of the property to bind
+*Mandatory*
 
-=======================
+#### Params:
+  - **scope**: Object or Array. The source object containing the property to bind.  
+  - **path**: String or Array. The path to the targeted source.(optional)  
+  Useful when you wan't to create a reference on a nested property  
 
-##### **@method** ***seal***()  
-seals the binding. the assignations will not work after that  
+#### Returns:
+ - Object; the binder
 
-=======================
+---
 
-##### **@method** ***unseal***()  
+###`to( scope )`
 
-=======================
+> Sets the target of the property to bind
+*Mandatory*
 
-##### **@method** ***destroy***()  
+#### Params:
+  - **scope**: Object or Array. The targeted object.  
+
+#### Returns:
+ - Object; the binder
+
+---
+
+###`apply( )`
+
+> Applies the configured binding
+*Mandatory*
+
+#### Returns:
+ - Object; the binder
+
+---
+
+###`as( alias )`
+
+> Sets the alias to use for the binding
+*Optional*
+
+#### Params:
+  - **scope**: Object or Array or String. The alias(es) to use.  
+
+#### Returns:
+ - Object; the binder
+
+---
+
+###`onchange( callback )`
+
+> Sets a onchange event
+*Optional*
+
+#### Params:
+  - **callback**: Function. The function called each time the property is updated from the created reference.  
+
+#### Returns:
+ - Object; the binder
+
+---
+
+###`seal( )`
+
+> Seals the binding. 
+> The next assignations will not work after this.  
+
+#### Returns:
+ - Object; the binder
+
+---
+
+###`unseal( )`
+
+> Useal the binding. 
+> The next assignations will now work.  
+
+#### Returns:
+ - Object; the binder
+
+---
+
+###`destroy( )`
+
+> Delete the created reference  
+
+---
 
 =======================
 
@@ -94,8 +163,6 @@ angular.module('App')
 		// old method - just create a reference with the factory property
 		// this.users = userFactory.users;	
 		// issue : the reference can be broken by many things
-
-		this.message = '';
 
 		bind('users'/*can take an array of properties*/)
 			.from(userFactory)
