@@ -127,7 +127,7 @@ Here is the full list of accessible methods:
 
 ###`unseal( )`
 
-> Useal the binding. 
+> Unseals the binding. 
 > The next assignations will now work.  
 
 #### Returns:
