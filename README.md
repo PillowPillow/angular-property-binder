@@ -57,7 +57,7 @@ Here is the full list of accessible methods:
 *Mandatory*
 
 #### Params:
-  - **scope**: Object or Array. The source object containing the property to bind.  
+  - **scope**: Object. The source object containing the property to bind.  
   - **path**: String or Array. The path to the targeted source.(optional)  
   Useful when you wan't to create a reference on a nested property  
 
@@ -72,7 +72,7 @@ Here is the full list of accessible methods:
 *Mandatory*
 
 #### Params:
-  - **scope**: Object or Array. The targeted object.  
+  - **scope**: Object. The targeted object.  
 
 #### Returns:
  - Object; the binder
