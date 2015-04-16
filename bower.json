@@ -1,7 +1,7 @@
 {
-  "name": "angular-property-binder",
+  "name": "angular-property-binder-source",
   "description": "Angular element binding service, keep safe your object references.",
-  "version": "0.1.5",
+  "version": "0.1.12",
   "authors": [
     "Nicolas Gaignoux <gaignoux.nicolas@gmail.com>"
   ],
@@ -27,6 +27,6 @@
     "lib/**/*.js"
   ],
   "dependencies": {
-    "angular": "~1.3.6"
+    "angular": "~1.3.15"
   }
 }
