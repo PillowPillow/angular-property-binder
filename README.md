@@ -1,7 +1,7 @@
 angular-property-binder
 =======================
 
-Tiny library that helping you to create references and keep them intact.
+Tiny library that will help you to create references and keep them intact.
   
 Don't use you're controller as a MODEL - [Best Practice](http://toddmotto.com/rethinking-angular-js-controllers/).  
 *Controllers should bind references to Models only (and call methods returned from promises)*
